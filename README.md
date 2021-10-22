@@ -32,12 +32,14 @@
       PORT = 62023 # change to any number you like from 49152-65535
     ```
     
-  * change "./source/main.cpp" line 51, line 119
+  * change "./source/main.cpp" line 51, line 119, line 157
     ```
     // line 51
       static constexpr size_t REMOTE_PORT = 62023; // standard HTTP port // change to the same number as the one in "./ws_server.py"
     // line 119
       address.set_ip_address("xxx.xxx.xxx.xxx"); // change to the HOST address as the one in "./ws_server.py"
+    // line 157
+      ThisThread::sleep_for(10000); // you can change the sample interval (default is 10000 ms)
     ```
     
 #### Start the server
@@ -62,30 +64,74 @@ Press "Run Program" button
 
 ### Expected output
 
-(Assuming you are using a wifi interface, otherwise the scanning will be skipped)
+#### PYTHON
 
+```
+Connected by ('172.20.10.2', 24555)
+Received from socket server :  GET / HTTP/1.1
+Host: ifconfig.io
+Connection: close
+
+
+Received from socket server :  {"x":-361,"y":287,"z":894,"s":1}
+Received from socket server :  {"x":-328,"y":195,"z":941,"s":2}
+Received from socket server :  {"x":460,"y":890,"z":286,"s":3}
+Received from socket server :  {"x":376,"y":870,"z":293,"s":4}
+Received from socket server :  {"x":378,"y":872,"z":287,"s":5}
+Received from socket server :  {"x":377,"y":871,"z":287,"s":6}
+Received from socket server :  {"x":383,"y":873,"z":271,"s":7}
+Received from socket server :  {"x":383,"y":874,"z":271,"s":8}
+Received from socket server :  {"x":382,"y":875,"z":275,"s":9}
+Received from socket server :  {"x":382,"y":873,"z":278,"s":10}
+...
+```
+
+While choosing mode 1 (colorbar), the figure will be:
+
+![image](https://user-images.githubusercontent.com/71332212/138418071-4266115c-b80e-4557-8025-47fa059e658c.png)
+
+
+Choosing mode 2 (color the newest one), the figure will be
+
+![image](https://user-images.githubusercontent.com/71332212/138418201-97a42481-3935-426b-8f47-22e6c1876935.png)
+
+
+
+#### MBED
 ```
 Starting socket demo
 
-2 networks available:
-Network: Virgin Media secured: Unknown BSSID: 2A:35:D1:ba:c7:41 RSSI: -79 Ch: 6
-Network: VM4392164 secured: WPA2 BSSID: 18:35:D1:ba:c7:41 RSSI: -79 Ch: 6
+Start sensor init
+3 networks available:
+Network: banana secured: WPA2 BSSID: B0:6E:BF:49:39:70 RSSI: -92 Ch: 1
+Network:  secured: WPA2 BSSID: 26:52:25:70:de:f0 RSSI: -26 Ch: 6
+Network: 0917572720 secured: WPA2 BSSID: 20:10:7A:c7:7e:aa RSSI: -64 Ch: 11
 
 Connecting to the network...
-IP address: 192.168.0.27
-Netmask: 255.255.255.0
-Gateway: 192.168.0.1
+IP address: 172.20.10.2
+Netmask: 255.255.255.240
+Gateway: 172.20.10.1
+Opening connection to remote port 62022
 
-Resolve hostname ifconfig.io
-ifconfig.io address is 104.24.122.146
-
-sent 52 bytes: 
+Sending message: 
 GET / HTTP/1.1
 Host: ifconfig.io
 Connection: close
 
-received 256 bytes:
-HTTP/1.1 200 OK
+sent 56 bytes
+Complete message sent
+Sample 1
 
-Demo concluded successfully 
+Sending message: 
+{"x":-361,"y":287,"z":894,"s":1}
+sent 32 bytes
+Complete message sent
+Sample 2
+
+Sending message: 
+{"x":-328,"y":195,"z":941,"s":2}
+sent 32 bytes
+Complete message sent
+...
+
 ```
