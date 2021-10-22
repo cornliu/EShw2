@@ -27,7 +27,7 @@
     ```
     # line 1
       mode = 2  # can switch between 1 and 2 to test
-    # line 25 - 26
+    # line 25 - 26 
       HOST = 'xxx.xxx.xxx.xxx' # change to the IPv4 address of your computer
       PORT = 62023 # change to any number you like from 49152-65535
     ```
