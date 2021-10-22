@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy.core.shape_base import block
 
-mode = 2
+mode = 1
 
 # mode: 
 ## 1: colorbar
@@ -22,7 +22,7 @@ fig = plt.figure()
 ax = fig.gca(projection='3d')
 
 
-HOST = '192.168.233.211'
+HOST = '172.20.10.4'
 PORT = 62023
 
 sample_num = 0
